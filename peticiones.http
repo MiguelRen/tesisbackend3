@@ -1,0 +1,41 @@
+### Peticion base
+http://localhost:4500/api/users
+
+
+### user requests GET
+    GET http://localhost:4500/api/users/karlos
+
+
+### user requests
+POST  http://localhost:4500/api/auth/signin HTTP/1.1
+content-type: application/json
+  
+{
+    "username" : "perry",
+    "password" : "parangaricutirimicuaro"
+}
+ 
+###patch request
+patch http://localhost:4500/users
+
+### Delete request
+
+DELETE http://localhost:4500/users/special
+
+### with Id param
+GET http://localhost:4500/users/:special
+
+
+
+### GET  request  with  body in it
+
+GET  http://localhost:4500/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name" : "maria"
+} 
+
+
+###
+GET http://localhost:4500/api/users
