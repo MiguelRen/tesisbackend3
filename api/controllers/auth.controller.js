@@ -22,7 +22,7 @@ exports.signup = (req, res) => {
       }
     })
     .catch(err => {
-      
+      console.log("problemas");
       res.status(500).send({ message: err.message });
     });
 
