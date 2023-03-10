@@ -1,9 +1,21 @@
 const allAccess = (req, res) => {
-    res.status(200).send("Contenido Público.");
+    try {
+        
+        res.status(200).send("Contenido Público.");
+        
+    } catch (error) {
+        console.log(error+ "  "+ error.message);    
+    }
   };
   
+  
   const userBoard = (req, res) => {
-    res.status(200).send("Contenido de Usuario.");
+    try {
+        res.status(200).send("Contenido de Usuario.");
+    
+  } catch (error) {
+    console.log(error);
+  }
   };
   
  const adminBoard = (req, res) => {
@@ -13,8 +25,8 @@ const allAccess = (req, res) => {
  const moderatorBoard = (req, res) => {
     res.status(200).send("Contenido de Moderador.");
   };
-
-
+ 
+ 
 module.exports = {
     allAccess,
     userBoard,
