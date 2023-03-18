@@ -28,32 +28,34 @@ exports.signup = (req, res) => {
 
 }; 
 
-exports.signin = async (req, res) => {
-  
- 
-  await findOneUser(req,res)
+exports.signin =  (req, res) => {
+   console.log(req);
+
+  findOneUser(req,res)
     .then(user => {
      
+      
       if (!user) {
         
        return res.status(404).send({message:'Usuario no encontrado.'}) ;
       
+      }else{
+        console.log("ningun user");
+        console.log(user);
       }
-     
-       
-   
+      
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
-      
+         
       if (!passwordIsValid) {
         
         return res.status(401).send({
           accessToken: null,
           message: "clave inválida!"
         });
-        
+         
        
       }
       

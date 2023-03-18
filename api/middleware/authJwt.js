@@ -84,4 +84,4 @@ const verifyToken = (req, res, next) => {
     isModerator: isModerator,
     isModeratorOrAdmin: isModeratorOrAdmin
   };
-  module.exports = authJwt;
+  module.exports = authJwt; 

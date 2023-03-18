@@ -3,15 +3,15 @@ import {getConnection} from "./../database/database.js";
 
 export const findOneUser =  async(req,res) =>{
     try{
+        console.log(req.body.username);
         
         const username = req.body.username;
-    
        const sql = "SELECT * FROM users WHERE username = ?";
         const connection =  await getConnection();
         const [result,metadata] = await connection.query(sql, username);
         
+        console.log(result[0]);
         return result[0];
-    
         
     }
     catch(error){
