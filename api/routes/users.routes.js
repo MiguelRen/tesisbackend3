@@ -1,42 +1,53 @@
 import { authJwt } from "../middleware";
 import { allAccess, userBoard, adminBoard, moderatorBoard,} from "../controllers/users.controller.js";
+import express from "express";
 
-module.exports = function(app) {
-  app.use(function(req, res, next) {
+const router = express.Router();
 
-    
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    
-    next();
-  });
-try {
+
+router.post('/',(req,res)=>{
+  console.log("blablablà");
+  const respo = req.body;
+  console.log(respo);
+  res.end();
+});
+
+router.get("/api/users", allAccess);
+
+ router.get(
+   "/api/users/user",
+   [authJwt.verifyToken],
+   userBoard
+ );
+
+ router.get(
+   "/api/test/mod",
+   [authJwt.verifyToken, authJwt.isModerator],
+   moderatorBoard
+ );
+
+ router.get(
+   "/api/test/admin",
+   [authJwt.verifyToken, authJwt.isAdmin],
+   adminBoard
+ );
+module.exports = router;
+
+// module.exports = function(app) {
   
-  app.get("/api/users", allAccess);
-} catch (error) {
-  console.log(error + " " +error.message);
-}
+//   app.use(function(req, res, next) {
 
-  app.get(
-    "/api/users/user",
-    [authJwt.verifyToken],
-    userBoard
-  );
+    
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "x-access-token, Origin, Content-Type, Accept"
+//     );
 
-  app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    moderatorBoard
-  );
+//     next();
+//   });
+// };
 
-  app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    adminBoard
-  );
-};
+  
 
 /* // Importing
 const express = require("express");

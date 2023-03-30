@@ -8,7 +8,7 @@ const allAccess = (req, res) => {
     }
   };
   
-  
+   
   const userBoard = (req, res) => {
     try {
         res.status(200).send("Contenido de Usuario.");

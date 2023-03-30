@@ -7,14 +7,41 @@ http://localhost:4500/api/users
 
 
 ### user requests
+POST  http://localhost:4500/api/users HTTP/1.1
+content-type: application/json
+  
+{
+    "username" : "perr",
+    "password" : "parangaricutirimicuaro"
+}
+
+### auth requests
+POST  http://localhost:4500/api/auth HTTP/1.1
+content-type: application/json
+  
+{
+    "username" : "huaj",
+    "password" : "puej"
+}
+### auth requests for one user
 POST  http://localhost:4500/api/auth/signin HTTP/1.1
 content-type: application/json
   
 {
-    "username" : "perry",
-    "password" : "parangaricutirimicuaro"
+    "username" : "usuario",
+    "password" : "usuario"
 }
+
+### auth requests for create user
+POST  http://localhost:4500/api/auth/signup HTTP/1.1
+content-type: application/json
   
+{
+    "username" : "usuario",
+    "email" : "usuario",
+    "password" : "usuario"
+}
+
 ###patch request
 patch http://localhost:4500/users
 
