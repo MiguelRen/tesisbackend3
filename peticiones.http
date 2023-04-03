@@ -37,8 +37,8 @@ POST  http://localhost:4500/api/auth/signup HTTP/1.1
 content-type: application/json
   
 {
-    "username" : "usuario",
-    "email" : "usuario",
+    "username" : "joh",
+    "email" : "john@gmail.com",
     "password" : "usuario"
 }
 

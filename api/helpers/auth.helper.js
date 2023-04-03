@@ -10,17 +10,16 @@ export const findOneUser =  async(req,res) =>{
         
         
         const username = req.body.username;
-       const sql = "SELECT * FROM users WHERE username = ?";
+        const sql = "SELECT * FROM users WHERE username = ?";
         const connection =  await getConnection();
         const [result,metadata] = await connection.query(sql, username);
         
-       
-        return result[0];
+        return new Promise(resolve=>resolve(result[0]));
         
     }
     catch(error){
         
-         return  res.status(401).send({message:error.message});
+         return  new Promise (resolve=>resolve(res.status(401).send({message:error.message})));
     }
 };
 
@@ -65,12 +64,9 @@ export const create = async(req,res)=> {
     try{     
         const connection = await getConnection();
         const sql = "INSERT INTO users (username,email,password) VALUES (?,?,?)";
-        await connection.query(sql,[username,email,password],(err,result,fields)=>{
-            if(err) throw err;
-            return result;
-            
-        });
-      
+        const result = await connection.query(sql,[username,email,password]);
+       
+        return result;
         // return res.status(200).send("usuario registrado");
     }
     catch(error){

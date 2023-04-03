@@ -2,40 +2,34 @@ import { findOneUser, findOneEmail } from '../helpers/auth.helper';
 
 const ROLES = ["usuario","moderador","administrador"];
 
-const checkDuplicateUsernameOrEmail =  (req, res, next) => {
+const checkDuplicateUsernameOrEmail = async (req, res, next) => {
         //username check
-        console.log("check dulicate");
-        findOneUser(req,res)
-            .then(user => {
-                console.log( user);
+        const user = await findOneUser(req,res);
+        const email = await findOneEmail(req,res)
+           
+    
                 if(user){
                     return res.status(400).send({
                         message : "usuario ya existente"
                     });
                     
                 }
-            }
-           
-
-        );
-
-        findOneEmail(req,res)
-        .then(user => {
-            // console.log(user.body);
-            console.log(user);
-            if(user){
+            
+ 
+            if(email){
                return res.status(400).send({
                     message: "email ya existente"
                 });
             }
-        })
+       
        
         next();
         };
 
 const checkRolesExisted = (req,res,next) =>{
-    console.log("check roles");
+        console.log("im in the role checking");
             if(req.body.roles){
+                console.log("im more in the role checking");
                 for(let i=0; i <req.body.roles.lenght; i++){
                     if(!ROLES.includes(req.body.roles[i])){
                        return  res.status(400).send({
