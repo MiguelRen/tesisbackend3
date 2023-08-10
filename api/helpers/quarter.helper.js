@@ -85,7 +85,7 @@ export const cur = async (req,res) =>{
             
         //     console.log("eexisted? "+ result[index]);
         // }
-            
+            console.log(result[0]);
         return result;
     
     } catch (error) {
