@@ -27,7 +27,7 @@ const allAccess = (req, res) => {
   };
  
  
-module.exports = {
+export {
     allAccess,
     userBoard,
     adminBoard,

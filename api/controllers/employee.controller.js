@@ -1,6 +1,6 @@
 import {cre,get} from "../helpers/employee.helper.js";
 
-exports.createEmployee = async (req,res)=>{
+const createEmployee = async (req,res)=>{
     try {
         console.log(req.body);
         const result = await cre(req,res);
@@ -11,7 +11,7 @@ exports.createEmployee = async (req,res)=>{
     }
 };
 
-exports.fetchEmployee = async (req,res)=>{
+const fetchEmployee = async (req,res)=>{
     // console.log("im in the controller");
     try {
         // console.log(req.body);
@@ -22,4 +22,9 @@ exports.fetchEmployee = async (req,res)=>{
         console.log(error);
         return error;
     }
+};
+
+export {
+  createEmployee,
+  fetchEmployee,  
 };

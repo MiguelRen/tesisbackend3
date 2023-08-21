@@ -1,5 +1,5 @@
-import { json } from "body-parser";
-import { getConnection } from "./../database/database.js";
+import  json  from "body-parser";
+import  getConnection  from "./../database/database.js";
 import bcrypt from "bcryptjs";
 
 export const findOneUser = async (req, res) => {
@@ -11,6 +11,7 @@ export const findOneUser = async (req, res) => {
     connection.release;
     return new Promise((resolve) => resolve(result[0]));
   } catch (error) {
+    console.log("findoneuser");
     return new Promise((resolve) =>
       resolve(res.status(401).send({ message: error.message }))
     );
@@ -119,6 +120,7 @@ export const getRole = async (user) => {
     const connection = await getConnection();
     const [result, metadata] = await connection.query(sql, user.userId);
     connection.release;
+    console.log("get role");
     console.log(result);
     return result;
   } catch (error) {

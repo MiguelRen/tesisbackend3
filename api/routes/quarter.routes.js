@@ -7,4 +7,4 @@ const router = express.Router();
 router.post('/',  createQuarter);
 router.get('/current',findCurrentQuarter)
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-import {getConnection}  from "../database/database.js"
+import getConnection  from "../database/database.js"
 
 export const cre = async(req,res) => {
     try{

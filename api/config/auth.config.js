@@ -1,3 +1,3 @@
-module.exports = {
-secret : "compass"
-};
+const secret = "compass" 
+export default secret;
+  

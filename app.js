@@ -17,7 +17,7 @@ import quarterRoutes from './api/routes/quarter.routes.js';
 
 
 //storind express into the app
-const app = express();
+export const app = express();
 //pre-routing
 // import {auth.routes.js} from './api/routes/auth.routes.js';
 // import {auth.routes.js} from './api/routes/users.routes.js';
@@ -75,4 +75,4 @@ app.use((error,req,res,next) => {
     })
 });
 
-module.exports = app ;
+export default  app;

@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import config from "../config/auth.config";
+import secret from "../config/auth.config.js";
 import { create, findAll, findOneUser, getRole} from "./../helpers/auth.helper.js";
 
 
-exports.signup = (req, res) => {
+const signup = (req, res) => {
   // Save User to Database
-
+  console.log("authcontroller signup");
   create(req,res) 
     .then((user) => {
       // return res.end();
@@ -32,7 +32,7 @@ exports.signup = (req, res) => {
     });
 };
 
-exports.signin = (req, res) => {
+const signin = (req, res) => {
   
   findOneUser(req, res)
     .then((user) => {
@@ -47,6 +47,8 @@ exports.signin = (req, res) => {
         user.userPassword
         );
         
+        console.log(req.body.password,
+          user.userPassword);
         
       if (!passwordIsValid) {
         
@@ -56,9 +58,10 @@ exports.signin = (req, res) => {
         });
       }
       console.log(user);
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.sign({ id: user.id }, secret, {
         expiresIn: 86400, // 24 hours
       });
+      console.log(token);
       
       var authorities = [];
       getRole(user).then((roles) => {
@@ -87,3 +90,8 @@ exports.signin = (req, res) => {
       // res.status(500).send({ message: err.message });
     });
 };
+
+export {
+  signin,
+  signup
+}

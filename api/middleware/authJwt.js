@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import config from "./../config/auth.config";
+import config from "./../config/auth.config.js";
 
 const verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
   
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
+
         return res.status(401).send({
           message: "Unauthorized!"
         });
@@ -84,4 +85,4 @@ const verifyToken = (req, res, next) => {
     isModerator: isModerator,
     isModeratorOrAdmin: isModeratorOrAdmin
   };
-  module.exports = authJwt; 
+  export default  authJwt; 

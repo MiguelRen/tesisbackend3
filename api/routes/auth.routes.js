@@ -1,6 +1,6 @@
-import { verifySignUp } from "../middleware";
-import {signin,signup} from "./../controllers/auth.controller";
-import express from "express";
+import { verifySignUp } from "../middleware/index.js";
+import {signin,signup} from "./../controllers/auth.controller.js";
+import express, { request } from "express";
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ router.post(
     signup
   );
     
-  router.post("/signin", signin );
+  router.post("/signin",signin );
  
 
-module.exports = router;
+export default router;
 

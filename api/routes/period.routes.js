@@ -18,4 +18,4 @@ router.get('/current',getCurrentPeriod);
 router.put('/',updatePeriod);
 router.delete('/',deletePeriod);
 
-module.exports = router;
+export default  router;

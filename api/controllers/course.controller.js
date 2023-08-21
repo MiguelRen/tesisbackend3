@@ -1,6 +1,6 @@
-import { cre, get, upd, del } from "./../helpers/course.helper";
+import { cre } from "./../helpers/course.helper.js";
 
- exports.createCourse = async (req, res) => {
+ const createCourse = async (req, res) => {
    
     try{
         console.log(req.body);
@@ -12,3 +12,6 @@ import { cre, get, upd, del } from "./../helpers/course.helper";
     }
 }
 
+export {
+    createCourse,
+};

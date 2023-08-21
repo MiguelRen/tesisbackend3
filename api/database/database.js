@@ -14,8 +14,6 @@ const getConnection = () => {
     return connection
 };
 
-module.exports = {
-    
-    getConnection
-}
+export default getConnection;
+
 

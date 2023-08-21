@@ -1,12 +1,12 @@
-import { authJwt } from "../middleware";
-import { allAccess, userBoard, adminBoard, moderatorBoard,} from "../controllers/users.controller.js";
+import { authJwt } from "../middleware/index.js";
+import  {allAccess, userBoard, adminBoard, moderatorBoard} from "../controllers/users.controller.js";
 import express from "express";
 
 const router = express.Router();
 
 
 router.post('/',(req,res)=>{
-  console.log("blablablà");
+  // console.log("blablablà");
   const respo = req.body;
   console.log(respo);
   res.end();
@@ -31,7 +31,7 @@ router.get("/api/users", allAccess);
    [authJwt.verifyToken, authJwt.isAdmin],
    adminBoard
  );
-module.exports = router;
+ export default  router;
 
 // module.exports = function(app) {
   

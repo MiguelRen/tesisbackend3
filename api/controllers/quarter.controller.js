@@ -1,6 +1,10 @@
 import {cre,cur} from "../helpers/quarter.helper.js"
 
-exports.createQuarter = async (req,res)=>{
+const createQuarter = async (req,res)=>{
+    console.log(
+
+        "quartecontroller create"
+    );
     try{
         console.log(req.body);
         const result = await cre(req,res);
@@ -11,9 +15,13 @@ exports.createQuarter = async (req,res)=>{
     }
 }
 
-exports.findCurrentQuarter = async (req,res)=>{
+const findCurrentQuarter = async (req,res)=>{
     // console.log(req.body);
     // console.log(res.body);
+    console.log(
+
+        "quartecontroller findcurrent"
+    );
     try{ 
 
         // console.log(req.body);
@@ -24,4 +32,9 @@ exports.findCurrentQuarter = async (req,res)=>{
         console.log(error);
         return error;
     }
-}
+};
+
+export {
+    createQuarter,
+    findCurrentQuarter,  
+};

@@ -1,4 +1,4 @@
-import { findOneUser, findOneEmail } from '../helpers/auth.helper';
+import { findOneUser, findOneEmail } from '../helpers/auth.helper.js';
 
 const ROLES = ["usuario","moderador","administrador"];
 
@@ -46,4 +46,4 @@ const verifySighnUp ={
     checkDuplicateUsernameOrEmail : checkDuplicateUsernameOrEmail,
     checkRolesExisted : checkRolesExisted
 }
-module.exports = verifySighnUp;
+export default verifySighnUp;

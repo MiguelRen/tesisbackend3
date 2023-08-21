@@ -7,4 +7,4 @@ const router = express.Router();
 router.post("/", createEmployee);
 router.get ("/",  fetchEmployee);
 
-module.exports = router;
+export default router;

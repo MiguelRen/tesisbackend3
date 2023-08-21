@@ -1,6 +1,6 @@
-import { getConnection } from "../database/database.js";
+import  getConnection  from "../database/database.js";
 
-exports.cre = async (req,res) => {
+const cre = async (req,res) => {
     console.log(req.body);
     try {
         const data = [
@@ -29,3 +29,6 @@ exports.cre = async (req,res) => {
     }
 
 }
+export{
+    cre,
+};

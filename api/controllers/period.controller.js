@@ -1,6 +1,6 @@
-import { cre, get,cur, upd, del } from "./../helpers/period.helper";
+import { cre, get,cur, upd, del } from "./../helpers/period.helper.js";
 
-exports.createPeriod = async (req, res) => {
+const createPeriod = async (req, res) => {
   try {
     const result = await cre(req, res);
     return result;
@@ -9,7 +9,7 @@ exports.createPeriod = async (req, res) => {
   }
 };
 
-exports.getPeriod = async (req,res)=>{
+const getPeriod = async (req,res)=>{
    try {
    const result =  await get(req,res);
    return result;
@@ -17,7 +17,7 @@ exports.getPeriod = async (req,res)=>{
       return error;
    }
 };
-exports.getCurrentPeriod = async (req,res)=>{
+const getCurrentPeriod = async (req,res)=>{
    try {
       // console.log(req);
       // console.log("im inside period controller");
@@ -28,7 +28,7 @@ exports.getCurrentPeriod = async (req,res)=>{
       return error;
    }
 };
-exports.updatePeriod = async (req,res) => {
+const updatePeriod = async (req,res) => {
    try {
       const result = await upd(req,res);
       return result;
@@ -37,7 +37,7 @@ exports.updatePeriod = async (req,res) => {
    }
 };
 
-exports.deletePeriod = async (req,res) => {
+const deletePeriod = async (req,res) => {
    try {
       const result = await del(req,res);
       return result;
@@ -45,3 +45,11 @@ exports.deletePeriod = async (req,res) => {
       return error;
    }
 }; 
+
+export {
+ createPeriod,
+ getPeriod,
+ getCurrentPeriod,
+ updatePeriod,
+ deletePeriod
+}

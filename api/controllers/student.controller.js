@@ -15,4 +15,7 @@ const createStudent = async (req,res) => {
 
 };
 
-module.exports = createStudent;
+export {
+
+    createStudent,
+} 
