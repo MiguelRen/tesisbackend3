@@ -2,11 +2,11 @@ import {config} from 'dotenv';
 config();
 
 export default {
-    host :process.env.HOST ||  "db4free.net" ,
+    host :process.env.HOST ||  "localhost" ,
     database :  process.env.DATABASE || "simpleclass" ,
-    user :   process.env.USER || "miguelo" ,
+    user :   process.env.USER || "miguel" ,
     password : process.env.PASSWORD || "compasss" ,
-    port : process.env.PORT || "3306"
+    port : process.env.PORT || "6060"
     
 
 };
