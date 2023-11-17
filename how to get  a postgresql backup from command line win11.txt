@@ -1,0 +1,5 @@
+1.- get into the folder you want to have the backup
+2.- open the terminal(or just figure out how to get  in the required plce from command line)
+3.- apply this :
+pg_dump -U userName -W -F p -f nameOfYourNewDoc.sql dataBaseName
+
