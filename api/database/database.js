@@ -1,7 +1,8 @@
-import mysql from "mysql2/promise";
+import pg from "pg";
 import config from "./config.js";
-
-const  connection = mysql.createConnection({
+// console.table(pg)
+const {Pool} = pg;
+const pool = new Pool({
     host : config.host,
     database : config.database,
     user : config.user,
@@ -9,11 +10,6 @@ const  connection = mysql.createConnection({
 });
 
 
-const getConnection = () => {
-   
-    return connection
-};
-
-export default getConnection;
+export default pool;
 
 
