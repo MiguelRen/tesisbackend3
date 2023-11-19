@@ -44,11 +44,11 @@ const signin = (req, res) => {
 
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
-        user.userPassword
+        user.use_userpassword
         );
         
         console.log(req.body.password,
-          user.userPassword);
+          user.use_userpassword);
         
       if (!passwordIsValid) {
         
