@@ -1,18 +1,17 @@
 import  json  from "body-parser";
-import  pool  from "./../database/database.js";
+import  getConnection  from "./../database/database.js";
 import bcrypt from "bcryptjs";
 
 export const findOneUser = async (req, res) => {
   try {
-    const username = [req.body.username];
-    // const connection = await getConnection();
-    const sql = "SELECT * FROM tab_user WHERE use_username = \$1";
-    const dbresponse = await pool.query(sql, username);
-    
- const result = dbresponse.rows[0]; 
-    return new Promise((resolve) => resolve(result));
+    const username = req.body.username;
+    const connection = await getConnection();
+    const sql = "SELECT * FROM tabuser WHERE username = ?";
+    const [result, metadata] = await connection.query(sql, username);
+    connection.release;
+    return new Promise((resolve) => resolve(result[0]));
   } catch (error) {
-    
+    console.log("findoneuser");
     return new Promise((resolve) =>
       resolve(res.status(401).send({ message: error.message }))
     );
@@ -22,26 +21,28 @@ export const findOneUser = async (req, res) => {
 
 export const findOneEmail = async (req, res) => {
   try {
-    const email = [req.body.email];
+    const email = req.body.email;
      
-    // const connection = await getConnection();
-    const sql  ="SELECT * FROM tab_user WHERE use_useremail = \$1";
-    const dbresponse = await pool.query(sql,email);
-    const result = dbresponse.rows[0];
-    
-    return new Promise((resolve)=> resolve(result));
+    const connection = await getConnection();
+    const [result, metadata] = await connection.query(
+      "SELECT username FROM tabuser WHERE userEmail = ?",
+      email
+    );
+    connection.release;
+
+    return result[0];
   } catch (error) {
      return res.status(401).send(error.message);
   }
 };
 export const findByPk = async (userId) => {
   try {
-    // const connection = await getConnection();
-    const dbresponse = pool.query(
-      "SELECT * FROM tab_user WHERE use_userid = \$1",
+    const connection = await getConnection();
+    const result = connection.query(
+      "SELECT * FROM tabuser WHERE id = ?",
       userId
     );
-    // connection.release;
+    connection.release;
 
     return res.status(200).json(result);
   } catch (error) {
@@ -58,47 +59,20 @@ export const create = async (req, res) => {
   // const dateTime = new Date();
   // console.log(username,email,password);
   try {
-
-    // const sql1 = "INSERT INTO tab_user (use_username,use_useremail,use_userpassword) VALUES ($1,$2,$3) returning use_userid ";
-    //   const result1 = await pool.query(sql1, [username, email, password],
-    //     (err,response1) =>{
-    //       if(err){
-    //         console.table(err)
-    //       }else{
-    //         console.log(response1.rows[0].use_userid);
-    //       }
-    //     });
-          
+    const connection = await getConnection();
     const sql1 =
-      "INSERT INTO tab_user (use_username,use_useremail,use_userpassword) VALUES ($1,$2,$3) returning *"; 
-      const dbresponse1 = await pool.query(sql1, [username, email, password],
-        // (err,response1) =>{
-        //   if(err){
-        //     console.table(err)
-        //   }else{
-        //     console.log(response1);
-        //   }
-          
-        // }
-        );
-        const use_userid = dbresponse1.rows[0].use_userid; 
-        console.log(use_userid);
+      "INSERT INTO tabuser (username,userEmail,userPassword) VALUES (?,?,?)"; 
+      const result1 = await connection.query(sql1, [username, email, password]);
+
       const sql2 =
-        "INSERT INTO link_userrole (userrole_tabuserid_fk) VALUES ($1)";
+        "INSERT INTO linkuserrole (userroleUserId) VALUES (?)";
 
-      const dbresponse2= await pool.query(sql2, [use_userid],
-        
-      //  (err)=>{
-      //   if (err){
-      //     console.log(err);
-      //   }
-      //  }
-        );
+      const result2= await connection.query(sql2, [result1[0].insertId]);
 
 
+    connection.release;
  
- 
-    // return result2;
+    return result2;
     // return res.status(200).send("usuario registrado");
   } catch (error) {
     
@@ -130,23 +104,23 @@ export const getRole = async (user) => {
 
     const sql =
     " select \
-      list_role.rol_rolename \
+      listrole.roleName \
       from \
-      list_role \
+      listrole \
       inner join \
-      link_userrole \
+      linkuserrole \
       on \
-      list_role.rol_roleid = link_userrole.userrole_listroleid_fk \
+      listrole.roleId = linkuserrole.userroleRoleId \
       inner join \
-      tab_user \
+      tabuser \
       on \
-      link_userrole.userrole_tabuserid_fk = tab_user.use_userid \
+      linkuserrole.userRoleUserId = tabuser.userId \
       where \
-      tab_user.use_userid = \$1";
-    // const connection = await getConnection();
-    const dbresponse = await pool.query(sql, [user.use_userid]);
-    // connection.release;
-    const result = dbresponse.rows[0];
+      tabuser.userId = ? ;";
+    const connection = await getConnection();
+    const [result, metadata] = await connection.query(sql, user.userId);
+    connection.release;
+    console.log("get role");
     console.log(result);
     return result;
   } catch (error) {
