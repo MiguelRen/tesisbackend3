@@ -67,7 +67,7 @@ app.use((req,res, next) => {
 
 app.use((error,req,res,next) => {
     console.log("error2");
-    res.status(error.status || 500);
+    res.status(error.status || 555);
     res.json({
         error:{
             message:"error2 inside -res-",
