@@ -66,12 +66,11 @@ app.use((req,res, next) => {
 });
 
 app.use((error,req,res,next) => {
-    console.log(error);
-    console.log(req);
-    res.status(error.status || 555);
+    
+    res.status(error.status || 500);
     res.json({
         error:{
-            message:"error2 inside -res-",
+            message:error,
             message: error.message
         }
     })
