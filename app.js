@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 
 // app.use((req,res,next) => {
 //     res.header('Access-Control-Allow-Origin' , '*' );
-//     res.header('Access-Control-Allow-Headers' , 
+//     res.header('Access-Control-Allow-Headers' ,
 //     'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 //     if(req.method ==='OPTIONS'){
 //         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -57,23 +57,23 @@ app.use('/api/quarter',quarterRoutes);
 
 
 // error handling
-app.use((req,res, next) => {
-    console.log("error1");
-    const error = newError('Not Found');
-    error.status= 404;
-    next(error);
+// app.use((req,res, next) => {
+//     console.log("error1");
+//     const error = newError('Not Found');
+//     error.status= 404;
+//     next(error);
 
-});
+// });
 
-app.use((error,req,res,next) => {
-    
-    res.status(error.status || 500);
-    res.json({
-        error:{
-            message:error,
-            message: error.message
-        }
-    })
-});
+// app.use((error,req,res,next) => {
+
+//     res.status(error.status || 500);
+//     res.json({
+//         error:{
+//             message:error,
+//             message: error.message
+//         }
+//     })
+// });
 
 export default  app;
