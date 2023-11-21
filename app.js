@@ -58,18 +58,19 @@ app.use('/api/quarter',quarterRoutes);
 
 // error handling
 app.use((req,res, next) => {
+    console.log("error1");
     const error = newError('Not Found');
-    
     error.status= 404;
     next(error);
 
 });
 
 app.use((error,req,res,next) => {
+    console.log("error2");
     res.status(error.status || 500);
     res.json({
         error:{
-            
+            message:"error2 inside -res-",
             message: error.message
         }
     })
