@@ -1,6 +1,8 @@
 import {config} from 'dotenv';
 config();
 
+connectionString
+
 export default {
     // host :process.env.HOST ||  "localhost" ,
     // database :  process.env.DATABASE || "simpleclass" ,
