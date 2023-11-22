@@ -8,7 +8,9 @@ const pool = new Pool({
     // user : config.user,
     // password : config.password,
     database_url : config.database_url,
-    ssl: true,
+    ssl: {
+        rejectUnauthorized:false,
+    },
 
 });
 
