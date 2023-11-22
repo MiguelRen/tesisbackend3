@@ -3,10 +3,10 @@ import config from "./config.js";
 // console.table(pg)
 const {Pool} = pg;
 const pool = new Pool({
-    host : config.host,
-    database : config.database,
-    user : config.user,
-    password : config.password,
+    // host : config.host,
+    // database : config.database,
+    // user : config.user,
+    // password : config.password,
     database_url : config.database_url,
     ssl: true,
 
