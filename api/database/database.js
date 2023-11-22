@@ -13,7 +13,8 @@ const pool = new Pool({
     // password : config.password,
     // connectionString,
     // database_url : config.database_url,
-    database_url:"postgres://miguel:vhmKQup0dtQL0zuNmyaFl1mtT7oBHwGO@dpg-cld8prmg1b2c73f55i5g-a/simpleclass",
+    // database_url:"postgres://miguel:vhmKQup0dtQL0zuNmyaFl1mtT7oBHwGO@dpg-cld8prmg1b2c73f55i5g-a/simpleclass",
+    database_url:"postgres://miguel:vhmKQup0dtQL0zuNmyaFl1mtT7oBHwGO@dpg-cld8prmg1b2c73f55i5g-a.oregon-postgres.render.com/simpleclass",
     ssl: {
         rejectUnauthorized:false,
     },
