@@ -52,9 +52,12 @@ export const findByPk = async (userId) => {
 
 // create new user
 export const create = async (req, res) => {
+  console.log("p1");
   const username = req.body.username;
   const email = req.body.email;
   const password = bcrypt.hashSync(req.body.password, 8);
+  
+  console.log("p2");
   // const dateTime = new Date();
   // console.log(username,email,password);
   try {
@@ -71,7 +74,10 @@ export const create = async (req, res) => {
           
     const sql1 =
       "INSERT INTO tab_user (use_username,use_useremail,use_userpassword) VALUES ($1,$2,$3) returning *"; 
+      console.log("p3");
       const dbresponse1 = await pool.query(sql1, [username, email, password],
+        );
+        console.log("p4 +" );
         // (err,response1) =>{
         //   if(err){
         //     console.table(err)
@@ -80,12 +86,11 @@ export const create = async (req, res) => {
         //   }
           
         // }
-        );
         const use_userid = dbresponse1.rows[0].use_userid; 
         console.log(use_userid);
       const sql2 =
         "INSERT INTO link_userrole (userrole_tabuserid_fk) VALUES ($1)";
-
+        console.log("p5");
       const dbresponse2= await pool.query(sql2, [use_userid],
         
       //  (err)=>{
@@ -95,13 +100,15 @@ export const create = async (req, res) => {
       //  }
         );
 
+        console.log("p6  "+ dbresponse2);
+
 
  
  
     // return result2;
     // return res.status(200).send("usuario registrado");
   } catch (error) {
-    
+    console.log("p7  \n" + error);
     return res.status(418).send(error.message);
   }
 };
