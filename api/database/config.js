@@ -1,7 +1,7 @@
 import {config} from 'dotenv';
 config();
 
-connectionString
+// connectionString
 
 export default {
     // host :process.env.HOST ||  "localhost" ,
