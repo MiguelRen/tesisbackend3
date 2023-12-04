@@ -4,12 +4,12 @@ config();
 // connectionString
 
 export default {
-    // host :process.env.HOST ||  "localhost" ,
-    // database :  process.env.DATABASE || "simpleclass" ,
-    // user :   process.env.USER || "miguel" ,
+    host :process.env.HOST ||  "localhost" ,
+    database :  process.env.DATABASE || "simpleclass" ,
+    user :   process.env.USER || "miguel" ,
+    port : process.env.PORT || "5432",
     password : process.env.PASSWORD || "456123" ,
-    // port : process.env.PORT || "5432",
-    database_url : process.env.DATABASE_URL,
+    // database_url : process.env.DATABASE_URL,
     
 
 };

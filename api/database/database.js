@@ -7,11 +7,11 @@ import config from "./config.js";
 // console.table(pg)
 const {Pool} = pg;
 const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL,
-    // host : config.host,
-    // database : config.database,
-    // user : config.user,
-    // password : configk.password,
+    // connectionString: process.env.POSTGRES_URL,
+    host : config.host,
+    database : config.database,
+    user : config.user,
+    password : config.password,
     // connectionString,
     // database_url : config.database_url,
     // database_url:"postgres://miguel:vhmKQup0dtQL0zuNmyaFl1mtT7oBHwGO@dpg-cld8prmg1b2c73f55i5g-a/simpleclass",
