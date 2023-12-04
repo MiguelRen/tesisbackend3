@@ -56,6 +56,7 @@ export const create = async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = bcrypt.hashSync(req.body.password, 8);
+  console.log(username+"\n"+email+"\n"+password);
   
   console.log("p2");
   // const dateTime = new Date();
