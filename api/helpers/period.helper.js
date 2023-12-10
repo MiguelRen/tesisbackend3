@@ -1,24 +1,27 @@
 import moment from "moment-timezone";
-import getConnection from "../database/database.js"
+import pool from "../database/database.js"
 
 
  export const cre= async (req,res) => {
     try {
-       console.log(req.body);
+    //    console.log(req.body);
        const dates = [
-        req.body.yearIni,
-        req.body.yearEnd,
+        req.body.dateStart,
+        req.body.dateEnd,
         
         ];
 
+        console.log(req.body.dateStart,
+        req.body.dateEnd,);
+
         const sql = 
         "INSERT INTO tabperiod\
-         (perYearIni,perYearEnd)\
+         (peryearstart,peryearend)\
          VALUES \
-         (?,?)";
-        const connection = await getConnection();
-        const result = await connection.query(sql,dates);
-        connection.realease;
+         ($1,$2)";
+        // const connection = await getConnection();
+        const result = await pool.query(sql,dates);
+        // connection.realease;
         return Promise.resolve(result);
     } catch (error) {
         console.log(error);
@@ -29,9 +32,9 @@ import getConnection from "../database/database.js"
  export const get = async (req,res) => {
     try {
         const sql = "SELECT * FROM tabperiod"
-        const connection = await getConnection();
-        const [data, metadata] = await  connection.query(sql);
-        connection.release;
+        // const connection = await getConnection();
+        const [data, metadata] = await  pool.query(sql);
+        // connection.release;
         return data;
     } catch (error) {
         return error;
@@ -43,7 +46,7 @@ import getConnection from "../database/database.js"
         // console.log("im inside period helper");
 
         const existed = await exist();
-       console.log(existed);
+    //    console.log(existed);
         if(existed){
             const data= [
                 existed.quaQuarterIni,
@@ -56,7 +59,7 @@ import getConnection from "../database/database.js"
             
             data[0]= data[0].tz('America/New_York').format('YYYY-MM-DD');
             data[1]= data[1].tz('America/New_York').format('YYYY-MM-DD');
-            console.log(data);
+            // console.log(data);
              
            
             
@@ -66,7 +69,7 @@ import getConnection from "../database/database.js"
             "SELECT * FROM tabquarter WHERE CURDATE() BETWEEN ? AND ? ;"
             const connection = await getConnection();
             const [result] = await  connection.query(sql,data);
-            console.log(result[0]);
+            // console.log(result[0]);
             connection.release;
             return res.status(200).send(result[0]);
         }else{ 

@@ -6,7 +6,7 @@ import { create, findAll, findOneUser, getRole} from "./../helpers/auth.helper.j
 
 const signup = (req, res) => {
   // Save User to Database
-  console.log("authcontroller signup");
+  // console.log("authcontroller signup");
   create(req,res) 
     .then((user) => {
       // return res.end();
@@ -26,7 +26,7 @@ const signup = (req, res) => {
       // } 
     })
     .catch((err) => {
-      console.log("porque entré aqui?");
+      // console.log("porque entré aqui?");
       
       return res.status(501).send({ message: err.message });
     });
@@ -47,8 +47,8 @@ const signin = (req, res) => {
         user.use_userpassword
         );
         
-        console.log(req.body.password,
-          user.use_userpassword);
+        // console.log(req.body.password,
+        //   user.use_userpassword);
         
       if (!passwordIsValid) {
         
@@ -57,15 +57,15 @@ const signin = (req, res) => {
           message: "clave inválida!",
         });
       }
-      console.log(user);
+      // console.log(user);
       var token = jwt.sign({ id: user.id }, secret, {
         expiresIn: 86400, // 24 hours
       });
-      console.log(token);
+      // console.log(token);
       
       var authorities = [];
       getRole(user).then((roles) => {
-        console.log(roles);
+        // console.log(roles);
       
         for (let i = 0; i < roles.length; i++) {
           authorities.push( roles[i].roleName.toUpperCase());
@@ -77,7 +77,7 @@ const signin = (req, res) => {
           roles: authorities,
           accessToken: token,
         };
-        console.log(objValues);
+        // console.log(objValues);
   
         return res.status(200).send(
          objValues);
