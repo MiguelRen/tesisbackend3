@@ -12,7 +12,8 @@ const createPeriod = async (req, res) => {
 const getPeriod = async (req,res)=>{
    try {
    const result =  await get(req,res);
-   return result;
+   // console.log(result);
+   return Promise.resolve(result);
    } catch (error) {
       return error;
    }
@@ -23,7 +24,7 @@ const getCurrentPeriod = async (req,res)=>{
       // console.log("im inside period controller");
    const result =  await cur(req,res);
    // console.log(result);
-   return result;
+   return Promise.resolve(result);
    } catch (error) {
       return error;
    }

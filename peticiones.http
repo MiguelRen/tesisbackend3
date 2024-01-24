@@ -69,3 +69,6 @@ GET http://localhost:4500/api/users
 
 ###
 GET http://localhost:4500/api/period/current HTTP/1.1
+
+###
+GET http://localhost:4500/api/period/ HTTP/1.1

@@ -4,17 +4,17 @@ import pool from "../database/database.js"
 
  export const cre= async (req,res) => {
     try {
-    //    console.log(req.body);
+    //    console.log("bleble");
        const dates = [
         req.body.dateStart,
         req.body.dateEnd,
-        
+
         ];
 
         console.log(req.body.dateStart,
         req.body.dateEnd,);
 
-        const sql = 
+        const sql =
         "INSERT INTO tabperiod\
          (peryearstart,peryearend)\
          VALUES \
@@ -28,96 +28,87 @@ import pool from "../database/database.js"
         return Promise.reject(error);
     }
  };
-  
+
  export const get = async (req,res) => {
     try {
+        // console.log("kgjsdfhgdfjkgh");
         const sql = "SELECT * FROM tabperiod"
         // const connection = await getConnection();
-        const [data, metadata] = await  pool.query(sql);
+        const result = await pool.query(sql);
         // connection.release;
-        return data;
+        console.log(result.rows);
+        res.status(200).json(result.rows);
+        return Promise.resolve(result);
     } catch (error) {
         return error;
     }
  };
- export const cur = async (req,res) => {
-   
-    try {
-        // console.log("im inside period helper");
 
-        const existed = await exist();
-    //    console.log(existed);
-        if(existed){
-            const data= [
-                existed.quaQuarterIni,
-                existed.quaQuarterEnd,
-                
-            ];
-            data[0]= moment(data[0]);
-            data[1]= moment(data[1]);
-               
-            
-            data[0]= data[0].tz('America/New_York').format('YYYY-MM-DD');
-            data[1]= data[1].tz('America/New_York').format('YYYY-MM-DD');
-            // console.log(data);
-             
-           
-            
-            
-            
-            const sql = 
-            "SELECT * FROM tabquarter WHERE CURDATE() BETWEEN ? AND ? ;"
-            const connection = await getConnection();
-            const [result] = await  connection.query(sql,data);
-            // console.log(result[0]);
-            connection.release;
-            return res.status(200).send(result[0]);
-        }else{ 
-            console.log( "there is no Period in there");
-            return res.status(500).send("there is no Period in there");
-        }
+ export const cur = async (req,res) => {
+
+// console.log(req.body);
+    try {
+        // // console.log(req);
+        const subresult = await exist();
+        const periodStart = subresult.peryearstart;
+        const periodEnd = subresult.peryearend;
+            // console.log(period);
+            const sql =
+            "SELECT * FROM tabperiod WHERE current_date BETWEEN $1 AND $2 ;";
+            // const connection = await getConnection();
+            const result = await pool.query(sql,[periodStart,periodEnd]);
+            const toSend = result.rows[0];
+            // connection.release;
+            res.status(200).json(toSend);
+            // res.send('yoo hooo');
+            // return Promise.resolve(result);
+
+            // console.log( "there is no Period in there");
+
     } catch (error) {
         console.log(error);
-        return error;
-    } 
- }; 
- 
+            //  res.status(500).json({error : error.message});
+
+    }
+ };
+
  export const upd = async (req,res) => {
     try {
         console.log("im in the upd");
     } catch (error) {
-        
+
     }
  };
- 
+
  export const del = async (req,res) => {
     try {
         console.log("im in the del");
     } catch (error) {
-         
+
     }
  };
  const exist = async ()=>{
     try {
-       
-        const sql = 
-        "Select * from tabperiod where quaQuarterIni = \
-        (select MAX(quaQuarterIni) from tabquarter) ; "
-        const connection = await getConnection();
-        const  [result, metadata ]= await connection.query(sql);
-    //    console.log(result[0]);
-        connection.release;
-        if (result[0]){
-            console.log("im here");
-            return result[0];
+
+        const sql =
+        "Select  * from tabperiod where peryearend = (Select MAX(peryearend) from tabperiod); "
+        // const connection = await getConnection();
+        const  result= await pool.query(sql);
+    //    console.log(result.rows);
+        // connection.release;
+        if (result){
+            // console.log("im here");
+            // console.log(result.rows[0]);
+            return result.rows[0];
         }else{
             return false;
         }
-        
+
     } catch (error) {
         console.log(error);
         return error
     }
  };
+//  exist();
 
-
+// cur();
