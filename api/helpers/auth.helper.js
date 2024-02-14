@@ -154,7 +154,7 @@ export const getRole = async (user) => {
     // const connection = await getConnection();
     const dbresponse = await pool.query(sql, [user.use_userid]);
     // connection.release;
-    const result = dbresponse.rows[0];
+    const result = dbresponse.rows;
     // console.log(result);
     return result;
   } catch (error) {

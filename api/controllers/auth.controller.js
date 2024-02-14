@@ -36,7 +36,7 @@ const signin = (req, res) => {
   
   findOneUser(req, res)
     .then((user) => {
-
+      // console.log(user);
       if (!user) {
         return res.status(404).send({ message: "Usuario no encontrado." });
       }
@@ -59,25 +59,26 @@ const signin = (req, res) => {
       }
       // console.log(user);
       var token = jwt.sign({ id: user.id }, secret, {
-        expiresIn: 86400, // 24 hours
+        expiresIn: 10800, // 24 hours
       });
       // console.log(token);
       
       var authorities = [];
       getRole(user).then((roles) => {
         // console.log(roles);
-      
+       
+        
         for (let i = 0; i < roles.length; i++) {
-          authorities.push( roles[i].roleName.toUpperCase());
+          authorities.push( roles[i].rol_rolename.toUpperCase());
         }   
         const objValues = {
           // id: user.id,
-          username: user.userName,
+          username: user.use_username,
           // email: user.userEmail,
           roles: authorities,
           accessToken: token,
         };
-        // console.log(objValues);
+        console.log(objValues);
   
         return res.status(200).send(
          objValues);

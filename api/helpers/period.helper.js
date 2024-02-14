@@ -2,6 +2,8 @@ import moment from "moment-timezone";
 import pool from "../database/database.js"
 
 
+
+
  export const cre= async (req,res) => {
     try {
     //    console.log("bleble");
@@ -11,8 +13,8 @@ import pool from "../database/database.js"
 
         ];
 
-        console.log(req.body.dateStart,
-        req.body.dateEnd,);
+       
+        
 
         const sql =
         "INSERT INTO tabperiod\
@@ -31,13 +33,24 @@ import pool from "../database/database.js"
 
  export const get = async (req,res) => {
     try {
+       
         // console.log("kgjsdfhgdfjkgh");
         const sql = "SELECT * FROM tabperiod"
         // const connection = await getConnection();
         const result = await pool.query(sql);
-        // connection.release;
-        console.log(result.rows);
-        res.status(200).json(result.rows);
+        // console.log(result.rows);
+
+       const convertedDates = result.rows.map(item =>{
+        return{
+        ...item,
+        peryearstart :  new Date(item.peryearstart).toLocaleDateString(),
+        peryearend : new Date(item.peryearend).toLocaleDateString()
+     }
+    });
+    //    console.log(convertedDates);
+
+        // console.log(perperiodid,peryearstart, peryearend);
+        res.status(200).json(convertedDates);
         return Promise.resolve(result);
     } catch (error) {
         return error;
@@ -46,20 +59,34 @@ import pool from "../database/database.js"
 
  export const cur = async (req,res) => {
 
-// console.log(req.body);
-    try {
-        // // console.log(req);
-        const subresult = await exist();
+     try {
+         const subresult = await maxPeriod();
+        //  console.log(subresult);
+  
         const periodStart = subresult.peryearstart;
         const periodEnd = subresult.peryearend;
-            // console.log(period);
+            // console.log(periodStart,periodEnd);
             const sql =
             "SELECT * FROM tabperiod WHERE current_date BETWEEN $1 AND $2 ;";
             // const connection = await getConnection();
             const result = await pool.query(sql,[periodStart,periodEnd]);
-            const toSend = result.rows[0];
+            // const toSend = result.rows[0];
+            // const perperiodid =  result.rows[0].perperiodid; 
+            // const peryearstart = result.rows[0].peryearstart.toLocaleDateString();
+            // const peryearend = result.rows[0].peryearend.toLocaleDateString();
             // connection.release;
-            res.status(200).json(toSend);
+            // const resultToSend = {perperi    odid,peryearstart,peryearend};
+            // console.log(result.rows);
+            const convertedDates = result.rows.map(item =>{
+                return{
+                    ...item,
+                    peryearstart : new Date(item.peryearstart).toLocaleDateString(),
+                    peryearend : new Date(item.peryearend).toLocaleDateString(),
+                }
+            });
+            // console.log(convertedDates);
+            res.status(200).json(convertedDates);
+            
             // res.send('yoo hooo');
             // return Promise.resolve(result);
 
@@ -87,22 +114,20 @@ import pool from "../database/database.js"
 
     }
  };
- const exist = async ()=>{
+ const maxPeriod = async ()=>{
     try {
-
+ 
         const sql =
-        "Select  * from tabperiod where peryearend = (Select MAX(peryearend) from tabperiod); "
+        "Select * from tabperiod where peryearend = (Select MAX(peryearend) from tabperiod); "
+        // "Select * from tabperiod ; ";
         // const connection = await getConnection();
         const  result= await pool.query(sql);
-    //    console.log(result.rows);
+       
+   
         // connection.release;
-        if (result){
-            // console.log("im here");
-            // console.log(result.rows[0]);
+     
             return result.rows[0];
-        }else{
-            return false;
-        }
+        
 
     } catch (error) {
         console.log(error);
