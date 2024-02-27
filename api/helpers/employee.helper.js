@@ -1,8 +1,9 @@
-import  getConnection  from "../database/database.js";
+import  pool from "../database/database.js";
 
 export const cre = async (req, res) => {
   try {
     const data = [
+      req.body.employeeid,
       req.body.employee1LastName,
       req.body.employee1Name,
       req.body.employee2LastName,
@@ -15,16 +16,24 @@ export const cre = async (req, res) => {
     ];
     console.log(data);
     const sql =
-      "insert into tabemployee\
-        (empEmployeeFirstName,empEmployeeSecondName,empEmployeeFirstLastName,empEmployeeSecondLastName,\
-            empEmployeeBirthday,empEmployeeDirection,empEmployeePhoneNumber,empEmployType,empEmployStatus)\
+      "insert into tab_employee\
+        (emp_employeeid, \
+          emp_employee1name,\
+          emp_employee2name,\
+          emp_employee1lastname,\
+          emp_employee2lastname,\
+          emp_employeebirth,\
+          emp_employeeadress,\
+          emp_employeephone,\
+          emp_employeestatus,\
+          emp_employeetype)\
         values\
-        (?,?,?,?,?,?,?,?,?)";
-    const connection = await getConnection();
-    const result = await connection.query(sql,data);
-    connection.release;
+        ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)";
+
+    const result = await pool.query(sql,data);
+    // connection.release;
     // console.log(result);
-    return result;
+    return result.rows;
   } catch (error) {
     console.log(error);
     return error;
@@ -37,12 +46,12 @@ export const get = async (req, res) => {
       
       // console.log(data);
       const sql =
-        " select * from  tabemployee;"
-      const connection = await getConnection();
-      const [result, meta] = await connection.query(sql);
-      connection.release;
-      // console.log(result);  
-      return res.end(JSON.stringify(result));
+        " select * from  tab_employee;"
+     
+      const result = await pool.query(sql);
+   
+      // console.log(result.rows);  
+      return res.status(200).json(result.rows);
     } catch (error) {
       console.log(error);
       return error;

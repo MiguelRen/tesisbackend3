@@ -1,10 +1,10 @@
 
-import {cre} from "../helpers/student.helper.js";
+import {cre,get} from "../helpers/student.helper.js";
 
 
 const createStudent = async (req,res) => {
     try {
-        console.log(req.body);
+     
         const result = await cre(req,res);
         return result;
     } catch (error) {
@@ -14,8 +14,17 @@ const createStudent = async (req,res) => {
     }
 
 };
+const getStudent = async(req,res) => {
+    try {
+        const result = await get(req,res)
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export {
 
     createStudent,
+    getStudent,
 } 

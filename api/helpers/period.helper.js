@@ -67,16 +67,12 @@ import pool from "../database/database.js"
         const periodEnd = subresult.peryearend;
             // console.log(periodStart,periodEnd);
             const sql =
+            
             "SELECT * FROM tabperiod WHERE current_date BETWEEN $1 AND $2 ;";
-            // const connection = await getConnection();
             const result = await pool.query(sql,[periodStart,periodEnd]);
-            // const toSend = result.rows[0];
-            // const perperiodid =  result.rows[0].perperiodid; 
-            // const peryearstart = result.rows[0].peryearstart.toLocaleDateString();
-            // const peryearend = result.rows[0].peryearend.toLocaleDateString();
-            // connection.release;
-            // const resultToSend = {perperi    odid,peryearstart,peryearend};
-            // console.log(result.rows);
+         
+            //const result = await pool.query(sql,[periodStart,periodEnd]);
+        
             const convertedDates = result.rows.map(item =>{
                 return{
                     ...item,
@@ -122,7 +118,7 @@ import pool from "../database/database.js"
         // "Select * from tabperiod ; ";
         // const connection = await getConnection();
         const  result= await pool.query(sql);
-       
+        // console.log(result.rows[0]);
    
         // connection.release;
      
@@ -136,4 +132,4 @@ import pool from "../database/database.js"
  };
 //  exist();
 
-// cur();
+ 

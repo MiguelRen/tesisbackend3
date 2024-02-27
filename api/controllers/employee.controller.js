@@ -11,12 +11,12 @@ const createEmployee = async (req,res)=>{
     }
 };
 
-const fetchEmployee = async (req,res)=>{
+const getEmployee = async (req,res)=>{
     // console.log("im in the controller");
     try {
         // console.log(req.body);
         const result = await get(req,res);
-        // console.log(result);
+        console.log(result);
         return result;
     } catch (error) {
         console.log(error);
@@ -24,7 +24,8 @@ const fetchEmployee = async (req,res)=>{
     }
 };
 
+
 export {
   createEmployee,
-  fetchEmployee,  
+  getEmployee,  
 };
