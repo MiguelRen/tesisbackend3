@@ -8,10 +8,11 @@ export const findOneUser = async (req, res) => {
     // const connection = await getConnection();
     const sql = "SELECT * FROM tab_user WHERE use_username = \$1";
     const dbresponse = await pool.query(sql, username);
+    console.log(dbresponse);
     
  const result = dbresponse.rows[0]; 
     return new Promise((resolve) => resolve(result));
-  } catch (error) {
+  } catch (error) { 
     
     return new Promise((resolve) =>
       resolve(res.status(401).send({ message: error.message }))

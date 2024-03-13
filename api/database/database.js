@@ -12,6 +12,9 @@ const pool = new Pool({
   database: config.database,
   user: config.user,
   password: config.password,
+  ssl: {
+    rejectUnauthorized: false, // Esto es opcional y depende de tu configuración de seguridad
+ },
   // connectionString,
   // database_url : config.database_url,
   // database_url:"postgres://miguel:vhmKQup0dtQL0zuNmyaFl1mtT7oBHwGO@dpg-cld8prmg1b2c73f55i5g-a/simpleclass",

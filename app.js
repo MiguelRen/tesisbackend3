@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-
+ 
 import userRoutes from './api/routes/users.routes.js';
 import authRoutes from './api/routes/auth.routes.js';
 import periodRoutes from './api/routes/period.routes.js';
