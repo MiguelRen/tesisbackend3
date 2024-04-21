@@ -10,6 +10,7 @@ export const findOneUser = async (req, res) => {
     const dbresponse = await pool.query(sql, username);
     
  const result = dbresponse.rows[0]; 
+//  console.log(dbresponse.rows[0]);
     return new Promise((resolve) => resolve(result));
   } catch (error) {
     

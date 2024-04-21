@@ -74,7 +74,7 @@ const signin = (req, res) => {
         const objValues = {
           // id: user.id,
           username: user.use_username,
-          // email: user.userEmail,
+          email: user.use_useremail,
           roles: authorities,
           accessToken: token,
         };
