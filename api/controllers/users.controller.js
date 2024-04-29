@@ -1,146 +1,101 @@
-const allAccess = (req, res) => {
+import {createUser,updateUser,findByUser,findByEmail,findAllUser} from "../helpers/user.helper.js"
+import bcrypt from "bcryptjs"
+
+const getUser = async (req, res) => {
     try {
         
-        res.status(200).send("Contenido Público.");
+      const {username}= req.body;
+      console.log(req.body);
+
+        const helperAnswer = await findByUser (username);
+        if(helperAnswer) {
+          res.status(200).send(helperAnswer)
+        }else{
+          res.status(404).send("Resouce not found")
+        }
         
     } catch (error) {
-        console.log(error+ "  "+ error.message);    
+        console.log("getUser controller ERROR",error.message);
+        res.status(500).send("server problems");    
     }
   };
   
+  
+const getUserAll = async () => {
+  try {
+      
+    const helperAnswer = await findAllUser();
+    if (helperAnswer) {
+      res.status(200).send(helperAnswer);
+    }else{
+      res.status(404).send("resource not found");
+    }
+      
+  } catch (error) {
+      console.log("getUserAll controller ERROR", error.message);    
+      res.status(500).send("server problems")
+  }
+};
    
-  const userBoard = (req, res) => {
+  const addUser= async (req, res) => {
     try {
-        res.status(200).send("Contenido de Usuario.");
+        let {username, email, password} = req.body
+        
+        password = bcrypt.hashSync(password,8);
+
+        
+        const helperAnswer = await createUser(username, email, password);
+
+        if (helperAnswer) {
+          res.status(200).send("resource added");
+        } else {
+          res.status(409).send("conflict")
+        }
+       
     
   } catch (error) {
-    console.log(error);
+    console.log("addUser controller ERROR", error.message);
+    res.status(503).send("resource not added \n server problems")
   }
   };
   
- const adminBoard = (req, res) => {
-    res.status(200).send("Contenido de Administracion.");
-  };
-  
- const moderatorBoard = (req, res) => {
-    res.status(200).send("Contenido de Moderador.");
+ const updUser = async (req, res) => {
+  try {
+    const clientData = req.body
+    const helperAnswer = await updateUser(clientData);
+
+      res.status(200).send("updated resource");
+   
+
+} catch (error) {
+console.log("updUser controller ERROR", error.message);
+res.status(304).send("not updated resource \n","server problems")
+}
+};
+ 
+
+
+ const delUser = async (req, res) => {
+  try {
+    const clientData = req.body
+    const helperAnswer = await delUser(clientData);
+
+      res.status(200).send("deletedd resource");
+   
+
+} catch (error) {
+console.log("deleted controller ERROR", error.message);
+res.status(304).send("not deleted resource \n","server problems")
+}
   };
  
  
 export {
-    allAccess,
-    userBoard,
-    adminBoard,
-    moderatorBoard,
+    getUser,
+    getUserAll,
+    addUser,
+    updUser,
+    delUser,
 
 };
 
-/* import {getConnection} from "./../database/database.js" 
-
-
-
-// GET
- 
-    //GET ALL USERS
-    const getUsers = async (req,res) =>{
-        try{
-                
-                const connection = await getConnection();
-                const result = await connection.query("SELECT * FROM usuarios;"); 
-                console.log(result);
-                res.status(200).json(result);
-        }
-        catch( error ){
-                
-                res.status(500);
-                res.send(error.message);
-        }
-       
-    };
- 
-    //GET AN SPECIFIC USER
-    const getOneUser = async ( req , res ) => {
-        try{
-
-            const { userId } = req.params;
-            const connection = await getConnection();
-            const result = await connection.query("SELECT * FROM usuarios WHERE nombre = ?", userId );
-            console.log(result);
-            res.status(200).json(result);
-        }
-        catch( error ){
-            res.status(500);
-            res.send(error.message)
-        }
-    };
-
-
-//POST
-    const logUser = async ( req , res ) => {
-        try{
-
-            console.log( req.body);
-            const { nombre, clave } = req.body;
-            
-            if (nombre === undefined || clave === undefined) {
-                res.send(body);
-                console.log(nombre,clave);
-                res.status(400).json({message:"bad request"})
-            }
-            else{
-                
-                            const user =  { nombre , clave } ; 
-                            console.log(user);
-                            const connection = await getConnection();
-                            const result = await connection.query("INSERT INTO usuarios SET ?", user );
-                            res.status(200).json(result);
-            }
-           
-        }
-        catch( error ){
-            res.status(500);
-            res.json(error.message);
-            }
-
-        };
-
-//PATCH
-
-const updateUser = async ( req , res ) => {
-    try{
-
-    }
-    catch( error ){
-        
-    }
-    console.log("watagatapitusberry");
-    const connection = await getConnection();
-    const result  = await connection.query("");
-    console.log(result);
-    res.status(200).json(result);
-};
-
-//DELETE
-
-const deleteUser = async ( req , res ) => {
-    try{
-
-    }
-    catch( error ){
-        
-    }
-    const connection = await getConnection();
-    const  result = await connection.query("DELETE user WHERE user = 'req' ");
-    console.log(result);
-    res.status(200).json(result);
-};
-
-export const method={
-    getUsers,
-    getOneUser,
-    logUser,
-    updateUser,
-    deleteUser
-};
-
- */

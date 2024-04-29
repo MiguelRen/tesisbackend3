@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 //     console.log(req.body);
 // // }
 // app.use("*",data);
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/auth' , authRoutes);
 app.use('/api/period',periodRoutes);
 app.use('/api/course',courseRoutes);

@@ -1,24 +1,25 @@
-import { findOneUser, findOneEmail } from '../helpers/auth.helper.js';
+import { findByUser, findByEmail } from '../helpers/user.helper.js';
 
 const ROLES = ["usuario","moderador","administrador"];
 
 const checkDuplicateUsernameOrEmail = async (req, res, next) => {
         //username check
-        const user = await findOneUser(req,res);
-        const email = await findOneEmail(req,res)
+        console.log(req.body);
+        const user = await findByUser(req,res);
+        const email = await findByEmail(req,res)
            
     
                 if(user){
-                    return res.status(400).send({
-                        message : "usuario ya existente"
+                    return res.status(409).send({
+                        message : "user already exists"
                     });
                     
                 }
             
  
             if(email){
-               return res.status(400).send({
-                    message: "email ya existente"
+               return res.status(409).send({
+                    message: "email already exists"
                 });
             }
        
