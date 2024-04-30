@@ -5,20 +5,27 @@ import express from "express";
 const router = express.Router();
 
 
-
-router.get('/',getUser);
+//getting info
+router.post('/user',getUser);
 
 router.get('/all',getUserAll);
 
+
+
+// adding info
 router.post('/',addUser);
 
 
 
+//updating info
+ router.patch('/',updUser);
 
- router.put('/',updUser);
 
+//deleting info
  router.delete('/',delUser);
  
+
+
  export default  router;
 
 

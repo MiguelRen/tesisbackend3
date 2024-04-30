@@ -13,19 +13,7 @@ const signup = (req, res) => {
       return res
         .status(200)
         .send({ message: "Usuario registrado exitosamente!" });
-      // if (req.body.roles) {
-      //   findAll(req).then((roles) => {
-      //     user.setRoles(roles).then(() => {
-
-      //       res.send({ message: "Usuario registrado exitosamente!" });
-      //     });
-      //   });
-      // } else {
-      //   // user role = 1
-      //   user.setRoles([1]).then(() => {
-      //     res.send({ message: "Usuario registrado exitosamente!" });
-      //   });
-      // }
+ 
     })
     .catch((err) => {
       // console.log("porque entré aqui?");
@@ -41,7 +29,7 @@ const signin = (req, res) => {
   findByUser(username)
     .then((user) => {
       // console.log(user);
-      if (!user) {
+      if (!user) {i
         return res.status(404).send({ message: "User not found" });
       }else{
         
@@ -79,7 +67,7 @@ const signin = (req, res) => {
             roles: authorities,
             accessToken: token,
           };
-          console.log(objValues);
+         
   
           return res.status(200).send(objValues);
         });

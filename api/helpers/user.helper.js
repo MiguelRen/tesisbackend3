@@ -15,8 +15,9 @@ export const findByUser = async (username) => {
     const sql = "SELECT * FROM tab_user WHERE use_username = \$1";
     const dbresponse = await pool.query(sql, [username]);
     
+
     const result = dbresponse.rows[0]; 
-     
+  
     return result;
 
   } catch (error) {
@@ -36,7 +37,7 @@ export const findAllUser = async () => {
  
     const dbresponse = await pool.query(sql);
     
-    const result = dbresponse.rows[0]; 
+    const result = dbresponse.rows; 
 
     return result;
 
@@ -74,7 +75,7 @@ export const createUser = async (username, email, password) => {
       // console.log("p3");
       const dbresponse1 = await pool.query(sql1, [username, email, password],
         );
-       console.log(dbresponse1);
+   
         const use_userid = dbresponse1.rows[0].use_userid; 
         // console.log(use_userid);
       const sql2 =

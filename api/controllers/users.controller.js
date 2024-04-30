@@ -5,7 +5,7 @@ const getUser = async (req, res) => {
     try {
         
       const {username}= req.body;
-      console.log(req.body);
+
 
         const helperAnswer = await findByUser (username);
         if(helperAnswer) {
@@ -21,7 +21,7 @@ const getUser = async (req, res) => {
   };
   
   
-const getUserAll = async () => {
+const getUserAll = async (req,res) => {
   try {
       
     const helperAnswer = await findAllUser();
@@ -39,6 +39,7 @@ const getUserAll = async () => {
    
   const addUser= async (req, res) => {
     try {
+      
         let {username, email, password} = req.body
         
         password = bcrypt.hashSync(password,8);
