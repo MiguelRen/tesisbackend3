@@ -39,7 +39,7 @@ const getUserAll = async (req,res) => {
    
   const addUser= async (req, res) => {
     try {
-      
+     
         let {username, email, password} = req.body
         
         password = bcrypt.hashSync(password,8);
@@ -62,15 +62,17 @@ const getUserAll = async (req,res) => {
   
  const updUser = async (req, res) => {
   try {
-    const clientData = req.body
-    const helperAnswer = await updateUser(clientData);
+    const lastUserName = req.body.lastUserName;
+    const newUserName = req.body.newUserName;
+    console.log(lastUserName,  newUserName);
+    const helperAnswer = await updateUser(lastUserName, newUserName);
 
       res.status(200).send("updated resource");
-   
+    
 
 } catch (error) {
 console.log("updUser controller ERROR", error.message);
-res.status(304).send("not updated resource \n","server problems")
+// res.status(304).send("not updated resource \n","server problems")
 }
 };
  

@@ -29,7 +29,7 @@ const signin = (req, res) => {
   findByUser(username)
     .then((user) => {
       // console.log(user);
-      if (!user) {i
+      if (!user) {
         return res.status(404).send({ message: "User not found" });
       }else{
         

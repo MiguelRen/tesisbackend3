@@ -18,7 +18,7 @@ router.post('/',addUser);
 
 
 //updating info
- router.patch('/',updUser);
+ router.patch('/userupdate',updUser);
 
 
 //deleting info

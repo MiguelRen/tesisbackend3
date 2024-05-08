@@ -97,12 +97,14 @@ export const createUser = async (username, email, password) => {
 };
 
 // update user data
-export const updateUser = async (req,res)=>{
-  const userLastName = req.body.userLastName;
-  const userNewName= req.body.userNewName;
-  const sql = `UPDATE tab_user set use_username = ${userNewName} where use_username = ${userLastName}`;
+export const updateUser = async (lastUserName, newUserName)=>{
+  const userLastName = lastUserName;
+  const userNewName= newUserName;
+  console.log(userLastName, userNewName);
+  const sql = `UPDATE tab_user set use_username = $1 where use_username = $2`;
   
-  const dbresponse = await pool.query(sql);
+  const dbresponse = await pool.query(sql, [ userNewName,userLastName]);
+  console.log(dbresponse);
   
   if (dbresponse[0]) {
     
