@@ -17,7 +17,7 @@ import pool from "../database/database.js"
         
 
         const sql =
-        "INSERT INTO tabperiod\
+        "INSERT INTO tab_period\
          (peryearstart,peryearend)\
          VALUES \
          ($1,$2)";
@@ -35,7 +35,7 @@ import pool from "../database/database.js"
     try {
        
         // console.log("kgjsdfhgdfjkgh");
-        const sql = "SELECT * FROM tabperiod"
+        const sql = "SELECT * FROM tab_period"
         // const connection = await getConnection();
         const result = await pool.query(sql);
         // console.log(result.rows);
@@ -68,7 +68,7 @@ import pool from "../database/database.js"
             // console.log(periodStart,periodEnd);
             const sql =
             
-            "SELECT * FROM tabperiod WHERE current_date BETWEEN $1 AND $2 ;";
+            "SELECT * FROM tab_period WHERE current_date BETWEEN $1 AND $2 ;";
             const result = await pool.query(sql,[periodStart,periodEnd]);
          
             //const result = await pool.query(sql,[periodStart,periodEnd]);
@@ -114,7 +114,7 @@ import pool from "../database/database.js"
     try {
  
         const sql =
-        "Select * from tabperiod where peryearend = (Select MAX(peryearend) from tabperiod); "
+        "Select * from tab_period where peryearend = (Select MAX(peryearend) from tab_period); "
         // "Select * from tabperiod ; ";
         // const connection = await getConnection();
         const  result= await pool.query(sql);
