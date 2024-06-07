@@ -4,10 +4,10 @@ config();
 // connectionString
 
 export default {
-  host: "dpg-cnl9092cn0vc73fiug50-a",
-  database:"simpleclass_ptug",
+  host: "dpg-cphie98cmk4c73eihtq0-a/simpleclass_11ml",
+  database:"simpleclass_11ml",
   user: "miguel",
   port:"5432",
-  password: "O2dc69APkpmhid3sK0o4Ww9tsX7yRHJS",
-  database_url : "postgres://miguel:O2dc69APkpmhid3sK0o4Ww9tsX7yRHJS@dpg-cnl9092cn0vc73fiug50-a/simpleclass_ptug",
+  password: "o3CBL0pxeGZ8FkG8s8w2nwuy6kQt7i68S",
+  database_url : "postgres://miguel:o3CBL0pxeGZ8FkG8s8w2nwuy6kQt7i68@dpg-cphie98cmk4c73eihtq0-a/simpleclass_11ml",
 };
