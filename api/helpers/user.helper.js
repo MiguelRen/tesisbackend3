@@ -10,7 +10,7 @@ import bcrypt from "bcryptjs";
 //verify if there is the user yet
 export const findByUser = async (username) => {
   try {
-
+    console.log(username);
 
     const sql = "SELECT * FROM tab_user WHERE use_username = \$1";
     const dbresponse = await pool.query(sql, [username]);
