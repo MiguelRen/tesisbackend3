@@ -4,7 +4,7 @@ config();
 // connectionString
 
 export default {
-  host: "dpg-cpm540eehbks73d8s5gg-a/simpleclass_1x4s",
+  host: "dpg-cpm540eehbks73d8s5gg-a",
   database:"simpleclass_1x4s",
   user: "simpleclass_1x4s_user",
   port:"5432",
