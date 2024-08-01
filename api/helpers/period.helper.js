@@ -97,9 +97,27 @@ import pool from "../database/database.js"
 
  export const upd = async (req,res) => {
     try {
-        console.log("im in the upd");
-    } catch (error) {
+        // const peryearstart =
+        // const peryearend =  
+        // console.log(req.body)
+        const oldDateStart = req.body.oldPeriod[0];
+        const oldDateEnd = req.body.oldPeriod[1];
+        const updYearStart = req.body.newPeriod[0];
+        const updYearEnd = req.body.newPeriod[1];
+        console.log("dhsfgjsdfh");
+        console.log(oldDateStart,oldDateEnd,updYearStart,updYearEnd);
+        
+        const sql= 
+        "UPDATE tab_period \
+         SET peryearstart = $1, peryearend = $2\
+         WHERE peryearstart = $3 \
+         AND peryearend = $4";
+        
+         const result = await pool.query(sql,[updYearStart,updYearEnd,oldDateStart,oldDateEnd]);
 
+        console.log(result);
+    } catch (error) {
+        console.log(error.message);
     }
  };
 
