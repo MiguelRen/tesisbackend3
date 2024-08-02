@@ -123,9 +123,21 @@ import pool from "../database/database.js"
 
  export const del = async (req,res) => {
     try {
-        console.log("im in the del");
-    } catch (error) {
+        
+        const periodToErase = req.params.id;
+      
+      
+        // const oldDateStart = req.body.
+        const sql= 
+        "DELETE FROM tab_period \
+            WHERE perperiodid = $1 \
+            "
 
+        const result = await pool.query( sql,[periodToErase] )
+        return result;
+
+    } catch (error) {
+        console.log(error.message);
     }
  };
  const maxPeriod = async ()=>{
