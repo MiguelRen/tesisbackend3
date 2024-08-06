@@ -1,20 +1,27 @@
 import getConnection  from "../database/database.js"
+import pool from "../database/database.js";
 
 export const cre = async(req,res) => {
     try{
         console.log(req.body);
+        
+        const newCourseName = req.body.courseName;
+        const newCourseType = req.body.courseType;
+        const newCoursePeriod = req.body.coursePeriod;
+
         const sql = 
-        "INSERT INTO tabcourse \
-        (couCourseName,couCoursePeriod)\
+        "INSERT INTO tab_course \
+        (cou_coursename, cou_coursetype, cou_courseperiodid_fk)\
         values \
-        (?,4)"; 
-        const data = req.body.courseName;
-        const connection =  await getConnection();
-        const result = connection.query(sql,data);
-        connection.release;
+        ($1,$2,$3)"; 
+        
+
+        const result = await pool.query(sql,[newCourseName,newCourseType, newCoursePeriod]);
+     
         console.log(result);
-        return Promise.resolve(result)
+        
     }catch(error){
-        return Promise.reject(error);
+        console.log(error);
+        
     }
 }
