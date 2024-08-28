@@ -1,4 +1,4 @@
-import { cre } from "./../helpers/course.helper.js";
+import { cre , getPeriods , cur } from "./../helpers/course.helper.js";
 
  const createCourse = async (req, res) => {
    
@@ -11,7 +11,29 @@ import { cre } from "./../helpers/course.helper.js";
         return error;
     }
 }
+ const getCoursePeriods = async (req,res) =>{
+    try {
+        console.log("jejejje");
+        
+        const result = await getPeriods(req,res);
+    
+        return 
+    } catch (error) {
+        console.log(error);
+        
+    }
+ }
 
+ const getParticularCourses = async (req,res)=>{
+    console.log(req.params.id);
+    
+    const result = await cur(req.params.id);
+    // console.log(result);
+    
+ }
+ 
 export {
     createCourse,
+    getCoursePeriods,
+    getParticularCourses,
 };
