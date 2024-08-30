@@ -55,14 +55,16 @@ console.log(convertedResult);
         
     }
 }
-export const cur = async (periodId)=>{
+export const cur = async (req,res)=>{
     try{
         const sql= "\
         select * from tab_course where cou_courseperiodid_fk = $1 \
         "
+        const periodId = req.params.id;
         const result = await pool.query(sql,[periodId]);
+        res.status(200).json(result.rows);
         console.log(result.rows);
-        
+        return
     }
     catch(error){
         console.log(error);

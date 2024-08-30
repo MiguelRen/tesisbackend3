@@ -25,11 +25,11 @@ import { cre , getPeriods , cur } from "./../helpers/course.helper.js";
  }
 
  const getParticularCourses = async (req,res)=>{
-    console.log(req.params.id);
+
     
-    const result = await cur(req.params.id);
+    const result = await cur(req, res);
     // console.log(result);
-    
+    return
  }
  
 export {
