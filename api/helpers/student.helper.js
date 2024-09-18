@@ -40,11 +40,42 @@ const cre = async (req,res) => {
 const get = async (req, res) =>{
     const sql= 'select * from tab_student '
     const result = await pool.query(sql);
-   
+    
     res.status(200).json(result.rows);
+}
+
+const getOneStudent = async (req,res) =>{
+    try {
+        const studentId = [(req.params.id)];
+        console.log("studentId \n" + studentId);
+        
+        const sql = "select * from tab_student where tab_student.stu_studentid = $1"
+        const result = await pool.query(sql,studentId);
+        console.log(result.rows);
+        res.status(200).json(result.rows);
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+const getList = async(req, res) =>{
+    const sql = "SELECT * FROM tab_student \
+    INNER JOIN link_sectionstudent ON link_sectionstudent.sectionstudent_student = tab_student.stu_studentid \
+    INNER JOIN tab_section ON tab_section.sec_sectionid = link_sectionstudent.sectionstudent_section \
+    WHERE tab_section.sec_sectionid = $1"
+   
+    const sectionId = [req.params.id];
+   console.log(sectionId);
+   
+    const result = await pool.query(sql, sectionId )
+    console.log(result.rows);
+    
 }
 
 export{
     cre,
     get,
+    getOneStudent,
+    getList
 };
