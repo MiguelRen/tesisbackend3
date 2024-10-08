@@ -20,7 +20,7 @@ const cre = async (req,res) => {
         
         const sql =
         "INSERT INTO tab_student\
-        (stu_studenid,stu_student1name ,stu_student2name,stu_student1lastname,stu_student2lastname ,stu_studentbirth,stu_studentadress,stu_studentphone,stu_studentemail,stu_studentgender)\
+        (stu_studentid,stu_student1name ,stu_student2name,stu_student1lastname,stu_student2lastname ,stu_studentbirth,stu_studentadress,stu_studentphone,stu_studentemail,stu_studentgender)\
         VALUES\
         ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);"
         ;
@@ -47,12 +47,14 @@ const get = async (req, res) =>{
 const getOneStudent = async (req,res) =>{
     try {
         const studentId = [(req.params.id)];
-        console.log("studentId \n" + studentId);
-        
-        const sql = "select * from tab_student where tab_student.stu_studentid = $1"
-        const result = await pool.query(sql,studentId);
-        console.log(result.rows);
-        res.status(200).json(result.rows);
+         
+        if(studentId){
+            console.log("studentId \n" + studentId);
+            const sql = "select * from tab_student where tab_student.stu_studentid = $1"
+            const result = await pool.query(sql,studentId);
+            console.log(result.rows);
+            res.status(200).json(result.rows[0]);
+        }
         
     } catch (error) {
         console.log(error);
