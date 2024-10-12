@@ -16,6 +16,6 @@ router.post('/',createPeriod);
 router.get('/', getPeriod); 
 router.get('/current',getCurrentPeriod);
 router.put('/',updatePeriod);
-router.delete('/',deletePeriod);
+router.delete('/:id',deletePeriod);
 
 export default  router;

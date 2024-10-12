@@ -40,6 +40,8 @@ const updatePeriod = async (req,res) => {
 
 const deletePeriod = async (req,res) => {
    try {
+      const id = req.params.id;
+      
       const result = await del(req,res);
       return result;
    } catch (error) {

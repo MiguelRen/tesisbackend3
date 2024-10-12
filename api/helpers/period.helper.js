@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+
 import pool from "../database/database.js"
 
 
@@ -97,17 +97,47 @@ import pool from "../database/database.js"
 
  export const upd = async (req,res) => {
     try {
-        console.log("im in the upd");
-    } catch (error) {
+        // const peryearstart =
+        // const peryearend =  
+        // console.log(req.body)
+        const oldDateStart = req.body.oldPeriod[0];
+        const oldDateEnd = req.body.oldPeriod[1];
+        const updYearStart = req.body.newPeriod[0];
+        const updYearEnd = req.body.newPeriod[1];
+        console.log("dhsfgjsdfh");
+        console.log(oldDateStart,oldDateEnd,updYearStart,updYearEnd);
+        
+        const sql= 
+        "UPDATE tab_period \
+         SET peryearstart = $1, peryearend = $2\
+         WHERE peryearstart = $3 \
+         AND peryearend = $4";
+        
+         const result = await pool.query(sql,[updYearStart,updYearEnd,oldDateStart,oldDateEnd]);
 
+        console.log(result);
+    } catch (error) {
+        console.log(error.message);
     }
  };
 
  export const del = async (req,res) => {
     try {
-        console.log("im in the del");
-    } catch (error) {
+        
+        const periodToErase = req.params.id;
+      
+      
+        // const oldDateStart = req.body.
+        const sql= 
+        "DELETE FROM tab_period \
+            WHERE perperiodid = $1 \
+            "
 
+        const result = await pool.query( sql,[periodToErase] )
+        return result;
+
+    } catch (error) {
+        console.log(error.message);
     }
  };
  const maxPeriod = async ()=>{
